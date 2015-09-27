@@ -62,7 +62,9 @@ typealias CudaSparseMatrix{T} Union(CudaSparseMatrixCSC{T}, CudaSparseMatrixCSR{
 
 length(g::CudaSparseMatrix) = prod(g.dims)
 size(g::CudaSparseMatrix) = g.dims
-ndims(::CudaSparseMatrix) = 2
+# ndims(::CudaSparseMatrix) = 2
+# stride(g::CudaSparseMatrix,i)=(i==1 ? 1 : i==2 ? g.dims[1] : length(g))
+# strides(g::CudaSparseMatrix)=(1,g.dims[1])
 
 function size{T}(g::CudaSparseMatrix{T}, d::Integer)
     d >= 1 ? (d <= 2 ? g.dims[d] : 1) : error("Invalid dim index")
@@ -87,7 +89,7 @@ function to_host{T}(Mat::CudaSparseMatrixCSR{T})
     return sparse(I,colVal,nzVal,Mat.dims[1],Mat.dims[2])
 end
 
-summary(g::CudaSparseMatrix) = string(g)
+# summary(g::CudaSparseMatrix) = string(g)
 
 CudaSparseMatrixCSC(T::Type, colPtr::Vector, rowVal::Vector, nzVal::Vector, dims::NTuple{2,Int}) = CudaSparseMatrixCSC{T}(CudaArray(convert(Vector{Cint},colPtr)), CudaArray(convert(Vector{Cint},rowVal)), CudaArray(nzVal), dims, convert(Cint,length(nzVal)), device())
 CudaSparseMatrixCSC(T::Type, colPtr::CudaArray, rowVal::CudaArray, nzVal::CudaArray, dims::NTuple{2,Int}) = CudaSparseMatrixCSC{T}(colPtr, rowVal, nzVal, dims, convert(Cint,length(nzVal)), device())

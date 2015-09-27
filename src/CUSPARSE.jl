@@ -8,7 +8,7 @@ typealias SparseChar Char
 import Base.one
 import Base.zero
 
-export CudaSparseMatrixCSC, CudaSparseMatrixCSR, CudaSparseMatrixHYB, CudaSparseMatrixBSR
+export CudaSparseMatrixCSC, CudaSparseMatrixCSR, CudaSparseMatrixHYB, CudaSparseMatrixBSR, CudaSparseMatrix
 
 include("util.jl")
 include("libcusparse_types.jl")
