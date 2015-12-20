@@ -225,7 +225,12 @@ test_convert_d2r(Float64)
 test_convert_d2r(Complex64)
 test_convert_d2r(Complex128)
 
-testnames = ["axpyi","dot","gthr","roti","sctr","csrsv","bsrsv","hybsv","csrmv","bsrmv","hybmv","csrmm","bsrmm","csrsm","bsrsm","gemm","geam","csric","csrilu","bsric","bsrilu","gtsv"]
+testnames = ["axpyi","dot","gthr","roti",
+             "sctr","bsrsv","hybsv",
+             "mv","mm","cssm",
+             "bsrsm","gemm","geam","csic",
+             "cssv","csilu","bsric",
+             "bsrilu","gtsv"]
 chosentests = testnames
 if( !isempty(ARGS) )
     chosentests = ARGS
